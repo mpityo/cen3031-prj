@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 import bcrypt
+from .config import Config
+
 
 class Database:
     def __init__(self):
@@ -9,20 +11,16 @@ class Database:
 
     @staticmethod
     def get_database():
-        # Provide the mongodb atlas url to connect python to mongodb using pymongo
-        connection_string = "mongodb+srv://adminuser:tacomanlikesburgers@cluster3031.doa671q.mongodb.net/?retryWrites=true&w=majority"
-
         # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-        client = MongoClient(connection_string)
+        client = MongoClient(Config.DB_CONNECTION)
 
         # Create the database for our example (we will use the same database throughout the tutorial
-
 
         return client.test_database
 
     @staticmethod
     def test():
-        uri = "mongodb+srv://adminuser:tacomanlikesburgers@cluster3031.doa671q.mongodb.net/?retryWrites=true&w=majority"
+        uri = Config.DB_CONNECTION
         # Create a new client and connect to the server
         client = MongoClient(uri, server_api=ServerApi('1'))
         # Send a ping to confirm a successful connection
@@ -110,3 +108,4 @@ class Database:
             return f"{result.deleted_count} document(s) deleted from '{username}' collection."
         else:
             return f"Collection for '{username}' not found."
+
