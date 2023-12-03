@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #chatContainer {
+            text-align: center;
+        }
+        /* Adjust the chat dimensions */
+        #chat {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 1000px;
+            max-height: 1000px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        #chatForm {
+            display: flex;
+            justify-content: center;
+        }
+
+        #userInput {
+            width: 70%;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chatContainer">
+        <div id="chat">
+            <!-- Chat messages will be displayed here -->
+        </div>
+
+        <form id="chatForm">
+            <input type="text" id="userInput" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript code to handle chat interactions
+        const chatForm = document.getElementById('chatForm');
+        const userInput = document.getElementById('userInput');
+        const chat = document.getElementById('chat');
+
+        chatForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const userMessage = userInput.value;
+            appendMessage('User', userMessage);
+
+            // Add chatbot functionality TODO
+
+
+            setTimeout(function () {
+                const botResponse = "Insert real response here";
+                appendMessage('Interview Buddy', botResponse);
+            }, 500);
+        });
+
+        function appendMessage(role, content) {
+            const messageElement = document.createElement('p');
+            messageElement.textContent = `${role}: ${content}`;
+            chat.appendChild(messageElement);
+            userInput.value = '';  // Clear the input field
+        }
+    </script>
+
+</body>
+</html>

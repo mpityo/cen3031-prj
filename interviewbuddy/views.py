@@ -6,6 +6,8 @@ from pymongo import MongoClient
 from django.shortcuts import render
 from .database import Database
 from .config import Config
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 
 # Create your views here.
 client = MongoClient(Config.DB_CONNECTION)
@@ -21,6 +23,10 @@ db = Database()
 
 def home_view(request):
     return render(request, 'home.html')
+
+def chat_view(request):
+    # insert chat logic
+    return render(request, 'chat.html')
 
 class LoginView(FormView):
     template_name = 'registration/login.html'
@@ -44,7 +50,7 @@ class LoginView(FormView):
         response = db.login_user(username, password)
         print(response)
         if "successful" in response:
-            return super().form_valid(form)
+            return redirect('chat')
         else:
             messages.error(self.request, response)
 

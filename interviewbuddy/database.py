@@ -44,6 +44,11 @@ class Database:
         combined_hash = bcrypt.hashpw(combined_password, stored_salt)
         return combined_hash == stored_hash
 
+    def check_username(self, username):
+        if self.user_list.find_one({"username": username}):
+            return False
+        return True
+
     def register_user(self, username, password):
         # Check if the username already exists
         if self.user_list.find_one({"username": username}):
@@ -91,13 +96,20 @@ class Database:
     def get_user_collection(self, username):
         return self.user_database[username]
 
+    def delete_account(self, username):
+
+        if self.delete_user_collection(username):
+            user = self.user_list.delete_one({"username": username})
+
+        return "Account successfully deleted"
+
     #use as part of deleting a user's account
     def delete_user_collection(self, username):
         if username in self.user_database.list_collection_names():
             self.user_database[username].drop()
-            return f"Collection for '{username}' deleted."
+            return True
         else:
-            return f"Collection for '{username}' not found."
+            return False
 
     #use to delete chat history
     def delete_data_in_user_collection(self, username):
@@ -109,3 +121,18 @@ class Database:
         else:
             return f"Collection for '{username}' not found."
 
+ #update log to server after exiting program
+    def add_chat_log_to_user_collection(self, username, log):
+        user_collection = self.get_user_collection(username)
+        user_collection.insert_one(log)
+
+        return f"Chat successfully updated to server"
+
+    #retrieve data from server
+    def get_all_data_from_collection(self, username):
+        user_collection = self.get_user_collection(username)
+        projection = {"_id": 0}
+        all_data_cursor = user_collection.find({}, projection)
+        all_data = list(all_data_cursor)
+
+        return all_data
