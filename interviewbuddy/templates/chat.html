@@ -9,45 +9,21 @@
 </head>
 <body>
 
-    <div id="chatContainer">
-        <div id="chat">
-            <!-- Chat messages will be displayed here -->
+    {% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" class="form-control" name="user_input">
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+    <br>
+    {% if chatbot_response %}
+        <div>
+            {{ chatbot_response|safe }}
         </div>
 
-        <form id="chatForm">
-            <input type="text" id="userInput" required>
-            <button type="submit">Send</button>
-        </form>
-    </div>
-
-    <script>
-        // JavaScript code to handle chat interactions
-        const chatForm = document.getElementById('chatForm');
-        const userInput = document.getElementById('userInput');
-        const chat = document.getElementById('chat');
-
-        chatForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const userMessage = userInput.value;
-            appendMessage('User', userMessage);
-
-            // Add chatbot functionality TODO
-
-
-            setTimeout(function () {
-                const botResponse = "Insert real response here";
-                appendMessage('Interview Buddy', botResponse);
-            }, 500);
-        });
-
-        function appendMessage(role, content) {
-            const messageElement = document.createElement('p');
-            messageElement.textContent = `${role}: ${content}`;
-            chat.appendChild(messageElement);
-            userInput.value = '';  // Clear the input field
-        }
-    </script>
+    {% endif %}
+{% endblock content %}
 
 </body>
 </html>
