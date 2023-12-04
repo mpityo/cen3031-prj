@@ -1,4 +1,14 @@
-
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+    <title>Home Page</title>
+</head>
+<div class="container">
+    <div class="login form">
 <h2>Register</h2>
     {% if messages %}
         <ul class="messages">
@@ -11,6 +21,8 @@
         {% csrf_token %}
         <!-- Add your registration form fields here -->
         {{ form.as_p }}
-        <button type="submit">Register</button>
+        <center><button type="submit">Register</button></center>
     </form>
 <p><a href="{% url 'login' %}">Back to login</a></p>
+    </div>
+</div>

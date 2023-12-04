@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: #114B5F;
+    font-family: 'Poppins', sans-serif;
+}
+
+#chatContainer {
+    text-align: center;
+    color:#fff;
+
+}
+/* Adjust the chat dimensions */
+#chat {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 1000px;
+    max-height: 1000px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+#chatForm {
+    display: flex;
+    justify-content: center;
+}
+
+#userInput {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+button {
+    color: #fff;
+    background: #009579;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: 0.4s;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+}
+
+button:hover{
+    background: #006653;
+}

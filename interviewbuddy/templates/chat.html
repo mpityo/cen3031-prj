@@ -1,47 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static%}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Application</title>
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        #chatContainer {
-            text-align: center;
-        }
-        /* Adjust the chat dimensions */
-        #chat {
-            border: 1px solid #ccc;
-            padding: 20px;
-            width: 1000px;
-            max-height: 1000px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-        }
-
-        #chatForm {
-            display: flex;
-            justify-content: center;
-        }
-
-        #userInput {
-            width: 70%;
-            padding: 10px;
-            margin-right: 10px;
-        }
-
-        button {
-            padding: 10px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css'%}">
 </head>
 <body>
 
