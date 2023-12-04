@@ -6,9 +6,14 @@ from pymongo import MongoClient
 from django.shortcuts import render
 from .database import Database
 from .config import Config
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import redirect
+import openai, os
+from .config import OpenaiKey
+from django.views.decorators.csrf import csrf_exempt
 
+
+api_key = OpenaiKey.key
 # Create your views here.
 client = MongoClient(Config.DB_CONNECTION)
 dbname = client['test_database']
@@ -24,9 +29,24 @@ db = Database()
 def home_view(request):
     return render(request, 'home.html')
 
+@csrf_exempt  # CSRF exemption for simplicity; use a better approach in production
 def chat_view(request):
-    # insert chat logic
-    return render(request, 'chat.html')
+    chatbot_response = None
+    prompt = {"role": "user", "content": ""}
+    chat_list = []
+    if api_key is not None:
+        if request.method == 'POST':
+            openai.api_key = api_key
+            user_input = request.POST.get('user_input')
+            chat_list.append({"role": "user", "content": user_input})
+
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages = chat_list
+            )
+            chatbot_response = response['choices'][0]['message']['content']
+
+        return render(request, 'chat.html', {'user_input': prompt, 'chatbot_response': chatbot_response})
 
 class LoginView(FormView):
     template_name = 'registration/login.html'
