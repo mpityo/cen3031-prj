@@ -46,8 +46,8 @@ class Database:
 
     def check_username(self, username):
         if self.user_list.find_one({"username": username}):
-            return False
-        return True
+            return True
+        return False
 
     def register_user(self, username, password):
         # Check if the username already exists
@@ -90,6 +90,8 @@ class Database:
 
         # Must insert data for collection to get created
         new_collection.insert_one({"example_key": "example_value"})
+        self.delete_data_in_user_collection(username)
+
         return new_collection
 
 
