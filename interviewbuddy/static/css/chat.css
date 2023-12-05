@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 body {
-    display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
     background: #114B5F;
     font-family: 'Poppins', sans-serif;
+    display: flex;
 }
 
 #chatContainer {
@@ -22,11 +22,12 @@ body {
     max-height: 1000px;
     overflow-y: auto;
     margin-bottom: 20px;
+    border-radius: 10px;
 }
 
 #chatForm {
-    display: flex;
     justify-content: center;
+    display: flex;
 }
 
 #userInput {
