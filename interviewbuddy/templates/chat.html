@@ -6,23 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Application</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css'%}">
+    
 </head>
 <body>
-
+<div id="chatContainer">
     {% block content %}
-    <div id="chatContainer">
-        {% if chatbot_response %}
+    <h1>InterviewBuddy</h1>
         <div id="chat">
-            {{ chatbot_response|safe }}
+            {% if chatbot_response %}
+                {{ chatbot_response|safe }}
+            {% endif %}
         </div>
-    {% endif %}
-    <form id="chatForm" method="post">
-        {% csrf_token %}
-        <input type="text" class="form-control" name="user_input" id="userInput">
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    </form>
-    </div>
-{% endblock content %}
+        <form id="chatForm" method="post">
+            {% csrf_token %}
+            <input type="text" class="form-control" name="user_input" id="userInput" placeholder="Type your message...">
+            <button type="submit" class="btn btn-primary mt-3" id="buttonInput">Submit</button>
+        </form>
+    {% endblock content %}
+</div>
 
 </body>
 </html>
