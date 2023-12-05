@@ -25,28 +25,48 @@ except Exception as e:
     print(e)
 
 db = Database()
+class UserInfo:
+    def __init__(self):
+        self.uid = None
+        self.password = None
+
+
+
+logged_user = UserInfo()
 
 def home_view(request):
     return render(request, 'home.html')
 
-@csrf_exempt  # CSRF exemption for simplicity; use a better approach in production
+@csrf_exempt  # CSRF exemption for simplicity;
 def chat_view(request):
     chatbot_response = None
     prompt = {"role": "user", "content": ""}
     chat_list = []
-    if api_key is not None:
-        if request.method == 'POST':
-            openai.api_key = api_key
-            user_input = request.POST.get('user_input')
-            chat_list.append({"role": "user", "content": user_input})
 
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages = chat_list
-            )
-            chatbot_response = response['choices'][0]['message']['content']
+    if db.check_username(logged_user.uid):
 
+        data = db.get_all_data_from_collection(logged_user.uid)
+        for item in data:
+            chat_list.append(item)
+
+        if api_key is not None:
+            if request.method == 'POST':
+                openai.api_key = api_key
+                user_input = request.POST.get('user_input')
+                log = {"role": "user", "content": user_input}
+                chat_list.append(log)
+
+                response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages = chat_list
+                )
+                chatbot_response = response['choices'][0]['message']['content']
+
+                db.add_chat_log_to_user_collection(logged_user.uid, log)
+                db.add_chat_log_to_user_collection(logged_user.uid, {"role": "assistant", "content": chatbot_response})
         return render(request, 'chat.html', {'user_input': prompt, 'chatbot_response': chatbot_response})
+    else:
+        return render(request, 'home.html')
 
 class LoginView(FormView):
     template_name = 'registration/login.html'
@@ -70,6 +90,8 @@ class LoginView(FormView):
         response = db.login_user(username, password)
         print(response)
         if "successful" in response:
+            logged_user.uid = username
+            logged_user.password = password
             return redirect('chat')
         else:
             messages.error(self.request, response)
