@@ -89,8 +89,8 @@ class Database:
         new_collection = self.user_database[username]
 
         # Must insert data for collection to get created
-        new_collection.insert_one({"example_key": "example_value"})
-        self.delete_data_in_user_collection(username)
+        new_collection.insert_one({"role": "assistant", "content": "Hello and welcome to your interview preparation session! I'm here to help you get ready for all kinds of interviews, whether they're technical, behavioral, or anything in between. To get started, please let me know what specific role or industry you're interviewing for. Additionally, share how challenging you'd like the questions to be – whether you prefer a more standard difficulty level or if you're up for a more challenging experience. Feel free to ask me questions you'd like to practice, or let me know if you'd like me to generate some for you. The more information you provide, the more tailored and effective our preparation session will be. So, what's on your mind? Let me know, and we'll make sure you're well-prepared for your upcoming interviews!"})
+        #self.delete_data_in_user_collection(username)
 
         return new_collection
 
