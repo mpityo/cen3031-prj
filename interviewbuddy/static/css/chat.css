@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+html {
+    background: #114B5F;
+}
 body {
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background: #114B5F;
     font-family: 'Poppins', sans-serif;
     display: flex;
 }
@@ -12,7 +14,7 @@ body {
 #chatContainer {
     text-align: center;
     color:#fff;
-    height: 80vh;
+    height: 100%;
 
 }
 /* Adjust the chat dimensions */
@@ -20,10 +22,36 @@ body {
     border: 1px solid #ccc;
     padding: 20px;
     width: 1000px;
-    max-height: 1000px;
+    height: inherit;
+    max-height: 70vh;
     overflow-y: auto;
     margin-bottom: 20px;
     border-radius: 10px;
+}
+
+#chat div {
+    width: 100%;
+    border: 1px solid #d3d3d35e;
+    border-left: 0;
+    border-right: 0;
+}
+
+#chat div p {
+    max-width: 60%;
+    margin-bottom: 0;
+}
+
+#chat div:nth-child(odd) {
+    text-align: -webkit-right;
+}
+
+#chat div:nth-child(even) {
+    text-align: left;
+}
+.account {
+    color: #d3d3d399;
+    margin: 0;
+    font-size: smaller;
 }
 
 #chatForm {

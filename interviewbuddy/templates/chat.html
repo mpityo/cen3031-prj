@@ -14,7 +14,12 @@
     <h1>InterviewBuddy</h1>
         <div id="chat">
             {% for message in chat_list %}
-                {{ message.role }}: {{ message.content|safe }}<br>
+                <div>
+                <p>
+                    <p>{{ message.content|safe }}</p>
+                    <p class="account">{{ message.role }}</p>
+                </p>
+                </div>
             {% endfor %}
         </div>
         <form id="chatForm" method="post">
