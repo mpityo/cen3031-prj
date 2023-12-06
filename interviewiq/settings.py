@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from .config import Config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r!^hmg7xs0(q(*w-od40jk((915yyo!5rq(oo^8r5uk*yjmrdn'
+SECRET_KEY = Config.DJANGO
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -69,17 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'interviewiq.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django',
-#         'NAME': 'test_database',
-#     }
-# }
 
 
 # Password validation

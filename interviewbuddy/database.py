@@ -128,7 +128,7 @@ class Database:
         user_collection = self.get_user_collection(username)
         user_collection.insert_one(log)
 
-        return f"Chat successfully updated to server"
+        return "Chat successfully updated to server"
 
     #retrieve data from server
     def get_all_data_from_collection(self, username):

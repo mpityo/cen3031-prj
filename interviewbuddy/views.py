@@ -1,3 +1,5 @@
+from django.views.decorators.http import require_http_methods
+
 from .forms import LoginForm, RegisterForm
 from django.views.generic.edit import FormView
 from django.contrib import messages
@@ -34,10 +36,12 @@ class UserInfo:
 
 logged_user = UserInfo()
 
+@require_http_methods(["GET", "POST"])
 def home_view(request):
     return render(request, 'home.html')
 
-@csrf_exempt  # CSRF exemption for simplicity;
+
+@require_http_methods(["GET", "POST"])
 def chat_view(request):
     chatbot_response = None
     prompt = {"role": "user", "content": ""}

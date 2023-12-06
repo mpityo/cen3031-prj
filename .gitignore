@@ -1,3 +1,7 @@
 .idea
 .DS_Store
 config.py
+/interviewiq/config.py
+/interviewbuddy/config.py
+/interviewbuddy/__pycache__/*
+*.cpython-311.pyc
