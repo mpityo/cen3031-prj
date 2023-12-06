@@ -9,7 +9,7 @@ from .config import Config
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import redirect
 import openai, os
-from .config import OpenaiKey
+from .api_key import OpenaiKey
 from django.views.decorators.csrf import csrf_exempt
 
 
