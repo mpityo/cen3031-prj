@@ -12,6 +12,7 @@ body {
 #chatContainer {
     text-align: center;
     color:#fff;
+    height: 80vh;
 
 }
 /* Adjust the chat dimensions */

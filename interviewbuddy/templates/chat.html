@@ -13,9 +13,9 @@
     {% block content %}
     <h1>InterviewBuddy</h1>
         <div id="chat">
-            {% if chatbot_response %}
-                {{ chatbot_response|safe }}
-            {% endif %}
+            {% for message in chat_list %}
+                {{ message.role }}: {{ message.content|safe }}<br>
+            {% endfor %}
         </div>
         <form id="chatForm" method="post">
             {% csrf_token %}

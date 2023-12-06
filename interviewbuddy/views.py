@@ -43,12 +43,14 @@ def chat_view(request):
     prompt = {"role": "user", "content": ""}
     chat_list = []
 
+    #prevent user from using chatbot if he has not logged in
     if db.check_username(logged_user.uid):
 
         data = db.get_all_data_from_collection(logged_user.uid)
         for item in data:
             chat_list.append(item)
 
+        #prevent user from using chatbot if there is no key
         if api_key is not None:
             if request.method == 'POST':
                 openai.api_key = api_key
@@ -56,15 +58,20 @@ def chat_view(request):
                 log = {"role": "user", "content": user_input}
                 chat_list.append(log)
 
+                #create chatbot response
                 response = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages = chat_list
                 )
                 chatbot_response = response['choices'][0]['message']['content']
 
+                chat_list.append({"role": "assistant", "content": chatbot_response})
+                # update conversation to user's collection in database
                 db.add_chat_log_to_user_collection(logged_user.uid, log)
                 db.add_chat_log_to_user_collection(logged_user.uid, {"role": "assistant", "content": chatbot_response})
-        return render(request, 'chat.html', {'user_input': prompt, 'chatbot_response': chatbot_response})
+        #display webpage with responses
+        return render(request, 'chat.html', {'user_input': prompt, 'chatbot_response': chatbot_response, 'chat_list' : chat_list})
+    #return to home page if user hasnt logged in
     else:
         return render(request, 'home.html')
 
