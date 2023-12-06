@@ -21,8 +21,8 @@
         {% csrf_token %}
         <!-- Add your registration form fields here -->
         {{ form.as_p }}
-        <center><button type="submit">Register</button></center>
+        <button style="width:100%;" type="submit">Register</button>
     </form>
-<p><a href="{% url 'login' %}">Back to login</a></p>
+<p style="text-align:center;"><a href="{% url 'login' %}">Back to login</a></p>
     </div>
 </div>

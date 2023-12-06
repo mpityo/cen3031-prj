@@ -10,7 +10,6 @@ body{
     width: 100%;
     background: #114B5F;
 }
-
 .container{
     position: absolute;
     top: 50%;
@@ -45,6 +44,7 @@ body{
     transition: 0.4s;
     padding: 0.5rem 1rem;
     border-radius: 2px;
+    width: 100%;
   }
 
 .welcome button:hover{
@@ -79,6 +79,7 @@ body{
     transition: 0.4s;
     padding: 0.5rem 1rem;
     border-radius: 2px;
+    width: 100%;
 }
 
 .form button:hover{
