@@ -41,11 +41,11 @@ body {
     margin-bottom: 0;
 }
 
-#chat div:nth-child(odd) {
+#chat div:nth-child(even) {
     text-align: -webkit-right;
 }
 
-#chat div:nth-child(even) {
+#chat div:nth-child(odd) {
     text-align: left;
 }
 .account {
