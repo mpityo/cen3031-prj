@@ -21,10 +21,10 @@
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <center><button type="submit">Login</button></center>
+        <button style="width:100%;" type="submit">Login</button>
     </form>
 
-    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    <p style="text-align:center;">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
 </div>
 </div>
 {% endblock %}
