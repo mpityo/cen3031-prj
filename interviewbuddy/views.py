@@ -3,19 +3,15 @@ from django.views.decorators.http import require_http_methods
 from .forms import LoginForm, RegisterForm
 from django.views.generic.edit import FormView
 from django.contrib import messages
-from interviewbuddy.config import Config
 from pymongo import MongoClient
 from django.shortcuts import render
 from .database import Database
-from .config import Config
-from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import redirect
 import openai, os
-from .api_key import OpenaiKey
-from django.views.decorators.csrf import csrf_exempt
+from config import Config
 
 
-api_key = OpenaiKey.key
+api_key = Config.key
 # Create your views here.
 client = MongoClient(Config.DB_CONNECTION)
 dbname = client['test_database']
